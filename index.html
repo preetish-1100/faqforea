@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ™ 202 LED Face Mask — FOREO Swiss | Clinical-Grade Light Therapy</title>
+  <meta name="description"
+    content="FDA-cleared, derm-reviewed LED face mask with 8 wavelengths and 600 LED points. Clinical-grade light therapy in just 10 minutes. By FOREO Swiss.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ═══ Custom Cursor ═══ -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ═══ Progress Bar ═══ -->
+  <div id="progress-bar"></div>
+
+  <!-- ═══ Film Grain ═══ -->
+  <div id="film-grain"></div>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav id="nav">
+    <div class="nav-logo">FAQ™ 202</div>
+    <ul class="nav-links">
+      <li><a href="#s1" data-section="0">Intro</a></li>
+      <li><a href="#s3" data-section="1">Science</a></li>
+      <li><a href="#s4" data-section="2">Results</a></li>
+      <li><a href="#s5" data-section="3">Trust</a></li>
+      <li><a href="#s7" data-section="5">Shop</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ Section Dots ═══ -->
+  <div id="section-dots">
+    <div class="section-dot active" data-section="0"></div>
+    <div class="section-dot" data-section="1"></div>
+    <div class="section-dot" data-section="2"></div>
+    <div class="section-dot" data-section="3"></div>
+    <div class="section-dot" data-section="4"></div>
+    <div class="section-dot" data-section="5"></div>
+  </div>
+
+  <!-- ═══ Three.js Canvas (behind everything) ═══ -->
+  <div id="three-canvas"></div>
+
+  <!-- ═══ SCROLL CONTENT ═══ -->
+  <div class="scroll-content">
+
+    <!-- ════════════════════════════════════
+         SECTION 1 — HERO
+         ════════════════════════════════════ -->
+    <section id="s1">
+      <div class="hero-bg">
+        <img src="images/model.png" alt="Woman wearing FAQ 202 LED mask" id="hero-model-img">
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+        <h1 class="hero-h1 fade-up">Ten minutes to yourself.</h1>
+        <p class="hero-sub fade-up">The rest takes care of itself.</p>
+      </div>
+      <div class="scroll-indicator" id="scroll-indicator">
+        <span>Scroll to continue</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+
+
+    <!-- ════════════════════════════════════
+         SECTION 3 — SCIENCE / WAVELENGTHS
+         ════════════════════════════════════ -->
+    <section id="s3">
+      <div class="s3-pin">
+        <div class="s3-content-wrapper">
+          <div class="s3-headline-container">
+            <h2 class="s3-headline" id="s3-headline">Four kinds of light.<br>Each one your skin already knows.</h2>
+          </div>
+          <div class="s3-canvas-container">
+            <canvas id="s3-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 4 — HORIZONTAL SCROLL GALLERY
+         ════════════════════════════════════ -->
+    <section id="s4">
+      <div class="h-container">
+        <!-- Panel 1: Progress -->
+        <div class="h-panel">
+          <img src="images/progress.png" alt="Month 1 to Month 3 progress" loading="lazy">
+          <div class="h-panel-text bottom-left">
+            <p class="hero-eyebrow" style="opacity:1; margin-bottom:0.5rem;">Month 1 → Month 2 → Month 3</p>
+            <h3 class="h-panel-headline">Results, quietly.</h3>
+          </div>
+        </div>
+
+        <!-- Panel 2: Before/After Stats -->
+        <div class="h-panel">
+          <div class="placeholder-img" id="ph-before-after">Placeholder: Before/After skin close-up comparison</div>
+          <div class="h-panel-text center">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-number" id="stat-wrinkles">0%</div>
+                <p class="stat-label">Fewer wrinkles</p>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" id="stat-acne">0%</div>
+                <p class="stat-label">Reduced acne</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Lightweight -->
+        <div class="h-panel">
+          <div class="placeholder-img" id="ph-lifestyle-work">Placeholder: Woman at work wearing mask</div>
+          <div class="h-panel-text bottom-left">
+            <h3 class="h-panel-headline">Ultra-lightweight. Wireless.<br>Continue your day.</h3>
+          </div>
+        </div>
+
+        <!-- Panel 4: Swiss Design -->
+        <div class="h-panel">
+          <div class="placeholder-img" id="ph-product-display">Placeholder: Mask in display case on marble</div>
+          <div class="h-panel-text bottom-left">
+            <h3 class="h-panel-headline">Smart Swiss Design.</h3>
+            <p class="h-panel-sub">USB-C rechargeable · App-connected</p>
+          </div>
+        </div>
+
+        <!-- Panel 5: 100% stat -->
+        <div class="h-panel">
+          <div class="big-stat" id="big-stat-bg">100%</div>
+          <div class="big-stat-text">
+            <div class="stat-number" id="stat-fit">100%</div>
+            <p class="stat-label">of users say it fits perfectly</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 5 — TRUST / DOCTOR
+         ════════════════════════════════════ -->
+    <section id="s5">
+      <div class="s5-pin">
+        <div class="s5-split">
+          <div class="doctor-img-wrap" id="doctor-img-wrap">
+            <img src="images/doctor.png" alt="Dr. Priya Sharma — Board-certified Dermatologist" loading="lazy">
+          </div>
+          <div class="s5-text-col">
+            <h2 class="s5-headline" id="s5-headline">FDA-cleared. Derm-reviewed.<br>Clinically dosed.</h2>
+            <p class="s5-quote" id="s5-quote">"The FAQ 202 delivers clinical-grade wavelengths at intensities that
+              actually make a difference. It's the only at-home device I recommend without hesitation."</p>
+            <p class="s5-attribution" id="s5-attr">— Dr. Priya Sharma · Board-certified Dermatologist · Mumbai</p>
+            <div class="trust-badges" id="trust-badges">
+              <div class="trust-badge">FDA Cleared</div>
+              <div class="trust-badge">CE Certified</div>
+              <div class="trust-badge">Derm Reviewed</div>
+              <div class="trust-badge">2-Year Warranty</div>
+              <div class="trust-badge">Wireless USB-C</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 6 — REVIEWS / SOCIAL PROOF
+         ════════════════════════════════════ -->
+    <section id="s6">
+      <div class="s6-pin">
+        <div class="reviews-grid">
+          <div class="reviews-left">
+            <div class="review-card" id="review-1">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"The <span class="highlight">glow</span> is unreal. My skin looks like it's been
+                retouched."</p>
+              <p class="review-author">— Ananya R., Beauty Editor</p>
+            </div>
+            <div class="review-card" id="review-2">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"I wear it while making <span class="highlight">chai</span>. Ten minutes and done."
+              </p>
+              <p class="review-author">— Meera S., Working Professional</p>
+            </div>
+            <div class="review-card" id="review-3">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"My dermatologist noticed the <span class="highlight">difference</span> before I
+                told her."</p>
+              <p class="review-author">— Kavya P., Skincare Enthusiast</p>
+            </div>
+          </div>
+          <div class="reviews-right">
+            <div class="video-thumb placeholder-img" id="ph-video-1">Placeholder: YouTube review thumbnail 1</div>
+            <div class="video-thumb placeholder-img" id="ph-video-2">Placeholder: YouTube review thumbnail 2</div>
+            <div class="video-thumb placeholder-img" id="ph-video-3">Placeholder: YouTube review thumbnail 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 7 — CTA / PRODUCT HERO
+         ════════════════════════════════════ -->
+    <section id="s7">
+      <div class="s7-pin">
+        <div class="cta-glow" id="cta-glow"></div>
+        <div class="cta-content">
+          <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+          <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
+          <p class="cta-price fade-up">$799</p>
+          <button class="cta-button fade-up" id="cta-shop">SHOP FAQ™ 202</button>
+          <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.scroll-content -->
+
+  <!-- ═══ Scripts ═══ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
