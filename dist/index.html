@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ™ 202 LED Face Mask — FOREO Swiss | Clinical-Grade Light Therapy</title>
+  <meta name="description"
+    content="FDA-cleared, derm-reviewed LED face mask with 8 wavelengths and 600 LED points. Clinical-grade light therapy in just 10 minutes. By FOREO Swiss.">
+  <script type="module" crossorigin src="/assets/index-u2wpIU_T.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bev63RMZ.css">
+</head>
+
+<body>
+
+  <!-- ═══ Custom Cursor ═══ -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <!-- ═══ Progress Bar ═══ -->
+  <div id="progress-bar"></div>
+
+  <!-- ═══ Film Grain ═══ -->
+  <div id="film-grain"></div>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav id="nav" class="flex justify-between items-center w-full px-4 md:px-8 lg:px-16 container mx-auto fixed top-0 left-0 right-0 z-50">
+    <div class="nav-logo">FAQ™ 202</div>
+    <div class="md:hidden text-cream text-2xl">☰</div>
+    <ul class="nav-links hidden md:flex items-center">
+      <li><a href="#s1" data-section="0">Intro</a></li>
+      <li><a href="#s3" data-section="1">Science</a></li>
+      <li><a href="#s4" data-section="2">Results</a></li>
+      <li><a href="#s5" data-section="3">Trust</a></li>
+      <li><a href="#s7" data-section="5">Shop</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ Section Dots ═══ -->
+  <div id="section-dots">
+    <div class="section-dot active" data-section="0"></div>
+    <div class="section-dot" data-section="1"></div>
+    <div class="section-dot" data-section="2"></div>
+    <div class="section-dot" data-section="3"></div>
+    <div class="section-dot" data-section="4"></div>
+    <div class="section-dot" data-section="5"></div>
+  </div>
+
+  <!-- ═══ Three.js Canvas (behind everything) ═══ -->
+  <div id="three-canvas"></div>
+
+  <!-- ═══ SCROLL CONTENT ═══ -->
+  <div class="scroll-content">
+
+    <!-- ════════════════════════════════════
+         SECTION 1 — HERO
+         ════════════════════════════════════ -->
+    <section id="s1" class="relative">
+      <div class="hero-bg w-full h-screen">
+        <img src="images/model.png" alt="Woman wearing FAQ 202 LED mask" id="hero-model-img" class="object-cover w-full h-screen">
+      </div>
+      <div class="hero-content container mx-auto px-4 md:px-8 lg:px-16">
+        <p class="hero-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+        <h1 class="hero-h1 fade-up text-4xl md:text-6xl lg:text-8xl">Ten minutes to yourself.</h1>
+        <p class="hero-sub fade-up">The rest takes care of itself.</p>
+      </div>
+      <div class="scroll-indicator" id="scroll-indicator">
+        <span>Scroll to continue</span>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+
+
+    <!-- ════════════════════════════════════
+         SECTION 3 — SCIENCE / WAVELENGTHS
+         ════════════════════════════════════ -->
+    <section id="s3">
+      <div class="s3-pin">
+        <div class="s3-content-wrapper container mx-auto px-4 md:px-8 lg:px-16">
+          <div class="s3-headline-container">
+            <h2 class="s3-headline absolute top-4 lg:top-12 text-2xl lg:text-5xl" id="s3-headline">Four kinds of light.<br>Each one your skin already knows.</h2>
+          </div>
+          <div class="s3-canvas-container">
+            <canvas id="s3-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 4 — HORIZONTAL SCROLL GALLERY
+         ════════════════════════════════════ -->
+    <section id="s4">
+      <div class="h-container flex flex-col md:flex-row">
+        <!-- Panel 1: Progress -->
+        <div class="h-panel w-screen h-screen flex-shrink-0 relative">
+          <img src="images/progress.png" alt="Month 1 to Month 3 progress" loading="lazy" class="w-full h-full object-cover">
+          <div class="h-panel-text bottom-left absolute container mx-auto px-4 md:px-8 lg:px-16">
+            <p class="hero-eyebrow" style="opacity:1; margin-bottom:0.5rem;">Month 1 → Month 2 → Month 3</p>
+            <h3 class="h-panel-headline">Results, quietly.</h3>
+          </div>
+        </div>
+
+        <!-- Panel 2: Before/After Stats -->
+        <div class="h-panel w-screen h-screen flex-shrink-0 relative">
+          <img src="images/before-after.png" alt="Before and after skin results" loading="lazy" class="w-full h-full object-cover">
+          <div class="h-panel-text center relative z-10">
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-number" id="stat-wrinkles">32%</div>
+                <p class="stat-label">Fewer wrinkles</p>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" id="stat-acne">48%</div>
+                <p class="stat-label">Reduced acne</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Lightweight -->
+        <div class="h-panel w-screen h-screen flex-shrink-0 relative">
+          <img src="images/lifestyle-work.png" alt="Wearing mask while working" loading="lazy" class="w-full h-full object-cover">
+          <div class="h-panel-text bottom-left absolute container mx-auto px-4 md:px-8 lg:px-16">
+            <h3 class="h-panel-headline">Ultra-lightweight. Wireless.<br>Continue your day.</h3>
+          </div>
+        </div>
+
+        <!-- Panel 4: Swiss Design -->
+        <div class="h-panel w-screen h-screen flex-shrink-0 relative">
+          <img src="images/product-display.png" alt="FAQ 202 in display case" loading="lazy" class="w-full h-full object-cover">
+          <div class="h-panel-text bottom-left absolute container mx-auto px-4 md:px-8 lg:px-16">
+            <h3 class="h-panel-headline">Smart Swiss Design.</h3>
+            <p class="h-panel-sub">USB-C rechargeable · App-connected</p>
+          </div>
+        </div>
+
+        <!-- Panel 5: 100% stat -->
+        <div class="h-panel w-screen h-screen flex-shrink-0 relative">
+          <img src="images/led-macro.png" alt="LED macro texture" class="w-full h-full object-cover absolute inset-0 opacity-30">
+          <div class="big-stat-text relative z-10 w-full text-center">
+            <div class="stat-number" id="stat-fit">100%</div>
+            <p class="stat-label">of users say it fits perfectly</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 5 — TRUST / DOCTOR
+         ════════════════════════════════════ -->
+    <section id="s5">
+      <div class="s5-pin w-full h-screen">
+        <div class="s5-split flex flex-col md:flex-row container mx-auto px-4 md:px-8 lg:px-16 items-center">
+          <div class="doctor-img-wrap md:w-[40%] w-48 h-48 md:w-auto md:h-auto rounded-full mx-auto" id="doctor-img-wrap">
+            <img src="images/doctor.png" alt="Dr. Priya Sharma — Board-certified Dermatologist" loading="lazy" class="w-full h-full object-cover rounded-full md:rounded-none">
+          </div>
+          <div class="s5-text-col md:w-[60%] flex-1">
+            <h2 class="s5-headline" id="s5-headline">FDA-cleared. Derm-reviewed.<br>Clinically dosed.</h2>
+            <p class="s5-quote" id="s5-quote">"The FAQ 202 delivers clinical-grade wavelengths at intensities that
+              actually make a difference. It's the only at-home device I recommend without hesitation."</p>
+            <p class="s5-attribution" id="s5-attr">— Dr. Priya Sharma · Board-certified Dermatologist · Mumbai</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 6 — REVIEWS / SOCIAL PROOF
+         ════════════════════════════════════ -->
+    <section id="s6">
+      <div class="s6-pin w-full h-screen">
+        <div class="reviews-grid grid grid-cols-1 md:grid-cols-2 gap-8 container mx-auto px-4 md:px-8 lg:px-16 w-full items-center">
+          <div class="reviews-left flex flex-col gap-6">
+            <img src="images/review-1.png" loading="lazy">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"The <span class="highlight">glow</span> is unreal. My skin looks like it's been
+                retouched."</p>
+              <p class="review-author">— Ananya R., Beauty Editor</p>
+            </div>
+            <img src="images/review-2.png" loading="lazy">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"I wear it while making <span class="highlight">chai</span>. Ten minutes and done."
+              </p>
+              <p class="review-author">— Meera S., Working Professional</p>
+            </div>
+            <img src="images/review-3.png" loading="lazy">
+              <div class="review-stars">★★★★★ &nbsp;5/5</div>
+              <p class="review-text">"My dermatologist noticed the <span class="highlight">difference</span> before I
+                told her."</p>
+              <p class="review-author">— Kavya P., Skincare Enthusiast</p>
+            </div>
+          </div>
+          <div class="reviews-right flex flex-col gap-4">
+            <div class="video-thumb placeholder-img" id="ph-video-1">Placeholder: YouTube review thumbnail 1</div>
+            <div class="video-thumb placeholder-img" id="ph-video-2">Placeholder: YouTube review thumbnail 2</div>
+            <div class="video-thumb placeholder-img" id="ph-video-3">Placeholder: YouTube review thumbnail 3</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
+         SECTION 7 — CTA / PRODUCT HERO
+         ════════════════════════════════════ -->
+    <section id="s7">
+      <div class="s7-pin container mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center justify-end h-screen w-full">
+        <div class="cta-glow" id="cta-glow"></div>
+        <div class="cta-content text-center">
+          <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+          <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
+          <p class="cta-price fade-up text-8xl md:text-9xl lg:text-[12rem]">$799</p>
+          <button class="cta-button fade-up w-full max-w-xs mx-auto" id="cta-shop">SHOP FAQ™ 202</button>
+          <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.scroll-content -->
+
+  <!-- ═══ Scripts ═══ -->
+</body>
+
+</html>
