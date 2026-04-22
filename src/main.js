@@ -58,20 +58,20 @@ D.querySelectorAll('a, button, .review-card, .cta-button').forEach((el) => {
    2. LENIS SMOOTH SCROLL
    ────────────────────────────────────── */
 const lenis = new Lenis({
-  duration: 1.2,
+  duration: 1.4,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  orientation: 'vertical',
   smoothWheel: true,
-  wheelMultiplier: 0.85,
-  touchMultiplier: 1.8,
-  infinite: false,
-  normalizeWheel: false,
+  wheelMultiplier: 1.0,
+  touchMultiplier: 2.0,
 });
 
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
-lenis.on('scroll', ScrollTrigger.update);
+function raf(time) {
+  lenis.raf(time);
+  ScrollTrigger.update();
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
 
 gsap.ticker.lagSmoothing(0);
 
@@ -195,30 +195,22 @@ for (let i = 1; i <= totalFrames; i++) {
 function drawFrame(index) {
   const img = frames[index];
   if (!img || !img.complete || !img.naturalWidth) return;
-  
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const imgRatio = img.naturalWidth / img.naturalHeight;
-  const vpRatio = vw / vh;
-  
-  let cw, ch;
-  // Cover: always fill viewport, never leave empty space
-  if (vpRatio > imgRatio) {
-    cw = vw;
-    ch = Math.ceil(vw / imgRatio);
+  const imgAspect = img.naturalWidth / img.naturalHeight;
+  const vpAspect = vw / vh;
+  let w, h;
+  if (vpAspect > imgAspect) {
+    w = vw; h = Math.round(vw / imgAspect);
   } else {
-    ch = vh;
-    cw = Math.ceil(vh * imgRatio);
+    h = vh; w = Math.round(vh * imgAspect);
   }
-  
-  // Only resize canvas if dimensions changed
-  if (s3Canvas.width !== cw || s3Canvas.height !== ch) {
-    s3Canvas.width = cw;
-    s3Canvas.height = ch;
-  }
-  
-  s3Ctx.clearRect(0, 0, cw, ch);
-  s3Ctx.drawImage(img, 0, 0, cw, ch);
+  s3Canvas.width = w;
+  s3Canvas.height = h;
+  s3Canvas.style.width = w + 'px';
+  s3Canvas.style.height = h + 'px';
+  s3Ctx.clearRect(0, 0, w, h);
+  s3Ctx.drawImage(img, 0, 0, w, h);
 }
 
 ScrollTrigger.create({
@@ -267,7 +259,7 @@ window.addEventListener('resize', () => {
   s3ResizeTimeout = setTimeout(() => {
     drawFrame(s3CurrentFrame);
     ScrollTrigger.refresh();
-  }, 100);
+  }, 150);
 });
 
 
@@ -276,22 +268,25 @@ const hContainer = document.querySelector('.h-container');
 const panels = gsap.utils.toArray('.h-panel');
 
 const isMobile = () => window.innerWidth < 768;
-
-if (panels.length && hContainer) {
-  gsap.to(hContainer, {
-    x: () => -(hContainer.scrollWidth - window.innerWidth),
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#s4',
-      pin: true,
-      scrub: 1,
-      start: 'top top',
-      end: () => '+=' + (hContainer.scrollWidth - window.innerWidth),
-      invalidateOnRefresh: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-    },
-  });
+if (!isMobile()) {
+  if (panels.length && hContainer) {
+    gsap.to(hContainer, {
+      x: () => -(hContainer.scrollWidth - window.innerWidth),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#s4',
+        pin: true,
+        scrub: 1,
+        start: 'top top',
+        end: () => '+=' + (hContainer.scrollWidth - window.innerWidth),
+        invalidateOnRefresh: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      },
+    });
+  }
+} else {
+  // on mobile panels are vertical, no GSAP horizontal needed
 }
 // Stats count-up
 let statsTriggered = false;
@@ -528,40 +523,3 @@ window.addEventListener('resize', () => {
     ScrollTrigger.refresh();
   }, 200);
 });
-
-const hamburger = document.getElementById('nav-hamburger');
-const navLinksMenu = document.querySelector('.nav-links'); // RENAMED TO FIX SYNTAX ERROR!
-
-if (hamburger && navLinksMenu) {
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('open');
-    navLinksMenu.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen);
-    // Pause/resume Lenis when menu is open
-    if (isOpen) {
-      lenis.stop();
-    } else {
-      lenis.start();
-    }
-  });
-
-  // Close menu when a nav link is clicked
-  navLinksMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navLinksMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      lenis.start();
-    });
-  });
-
-  // Close on escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && hamburger.classList.contains('open')) {
-      hamburger.classList.remove('open');
-      navLinksMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      lenis.start();
-    }
-  });
-}

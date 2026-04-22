@@ -25,12 +25,8 @@
   <nav id="nav"
     class="flex justify-between items-center w-full px-4 md:px-8 lg:px-16 container mx-auto fixed top-0 left-0 right-0 z-50">
     <div class="nav-logo">FAQ™ 202</div>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <ul class="nav-links">
+    <div class="md:hidden text-cream text-2xl">☰</div>
+    <ul class="nav-links hidden md:flex items-center">
       <li><a href="#s1" data-section="0">Intro</a></li>
       <li><a href="#s3" data-section="1">Science</a></li>
       <li><a href="#s4" data-section="2">Results</a></li>
@@ -188,49 +184,49 @@
           class="reviews-grid grid grid-cols-1 md:grid-cols-2 gap-8 container mx-auto px-4 md:px-8 lg:px-16 w-full items-center">
           <div class="reviews-left flex flex-col gap-6">
             <img src="images/review-1.png" loading="lazy">
-              <div class="review-stars">★★★★★ &nbsp;5/5</div>
-              <p class="review-text">"The <span class="highlight">glow</span> is unreal. My skin looks like it's been
-                retouched."</p>
-              <p class="review-author">— Ananya R., Beauty Editor</p>
-            </div>
-            <img src="images/review-2.png" loading="lazy">
-              <div class="review-stars">★★★★★ &nbsp;5/5</div>
-              <p class="review-text">"I wear it while making <span class="highlight">chai</span>. Ten minutes and done."
-              </p>
-              <p class="review-author">— Meera S., Working Professional</p>
-            </div>
-            <img src="images/review-3.png" loading="lazy">
-              <div class="review-stars">★★★★★ &nbsp;5/5</div>
-              <p class="review-text">"My dermatologist noticed the <span class="highlight">difference</span> before I
-                told her."</p>
-              <p class="review-author">— Kavya P., Skincare Enthusiast</p>
-            </div>
+            <div class="review-stars">★★★★★ &nbsp;5/5</div>
+            <p class="review-text">"The <span class="highlight">glow</span> is unreal. My skin looks like it's been
+              retouched."</p>
+            <p class="review-author">— Ananya R., Beauty Editor</p>
           </div>
-          <div class="reviews-right flex flex-col gap-4">
-            <div class="video-thumb placeholder-img" id="ph-video-1">Placeholder: YouTube review thumbnail 1</div>
-            <div class="video-thumb placeholder-img" id="ph-video-2">Placeholder: YouTube review thumbnail 2</div>
-            <div class="video-thumb placeholder-img" id="ph-video-3">Placeholder: YouTube review thumbnail 3</div>
-          </div>
+          <img src="images/review-2.png" loading="lazy">
+          <div class="review-stars">★★★★★ &nbsp;5/5</div>
+          <p class="review-text">"I wear it while making <span class="highlight">chai</span>. Ten minutes and done."
+          </p>
+          <p class="review-author">— Meera S., Working Professional</p>
         </div>
+        <img src="images/review-3.png" loading="lazy">
+        <div class="review-stars">★★★★★ &nbsp;5/5</div>
+        <p class="review-text">"My dermatologist noticed the <span class="highlight">difference</span> before I
+          told her."</p>
+        <p class="review-author">— Kavya P., Skincare Enthusiast</p>
       </div>
-    </section>
+  </div>
+  <div class="reviews-right flex flex-col gap-4">
+    <div class="video-thumb placeholder-img" id="ph-video-1">Placeholder: YouTube review thumbnail 1</div>
+    <div class="video-thumb placeholder-img" id="ph-video-2">Placeholder: YouTube review thumbnail 2</div>
+    <div class="video-thumb placeholder-img" id="ph-video-3">Placeholder: YouTube review thumbnail 3</div>
+  </div>
+  </div>
+  </div>
+  </section>
 
-    <!-- ════════════════════════════════════
+  <!-- ════════════════════════════════════
          SECTION 7 — CTA / PRODUCT HERO
          ════════════════════════════════════ -->
-    <section id="s7">
-      <div
-        class="s7-pin container mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center justify-center h-screen w-full">
-        <div class="cta-glow" id="cta-glow"></div>
-        <div class="cta-content text-center">
-          <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
-          <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
-          <p class="cta-price fade-up text-8xl md:text-9xl lg:text-[12rem]">$799</p>
-          <button class="cta-button fade-up w-full max-w-xs mx-auto" id="cta-shop">SHOP FAQ™ 202</button>
-          <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
-        </div>
+  <section id="s7">
+    <div
+      class="s7-pin container mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center justify-center h-screen w-full">
+      <div class="cta-glow" id="cta-glow"></div>
+      <div class="cta-content text-center">
+        <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+        <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
+        <p class="cta-price fade-up text-8xl md:text-9xl lg:text-[12rem]">$799</p>
+        <button class="cta-button fade-up w-full max-w-xs mx-auto" id="cta-shop">SHOP FAQ™ 202</button>
+        <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
       </div>
-    </section>
+    </div>
+  </section>
 
   </div><!-- /.scroll-content -->
 
