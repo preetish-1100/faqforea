@@ -109,7 +109,28 @@ function setActiveDot(index) {
   if (sectionDots[index]) sectionDots[index].classList.add('active');
 }
 
+/* ──────────────────────────────────────
+   5. MOBILE MENU TOGGLE
+   ────────────────────────────────────── */
+const menuToggle = D.getElementById('menu-toggle');
+const mobileNavLinks = D.getElementById('nav-links');
 
+if (menuToggle && mobileNavLinks) {
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileNavLinks.classList.toggle('active');
+    menuToggle.textContent = isOpen ? '✕' : '☰';
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileNavLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNavLinks.classList.remove('active');
+      menuToggle.textContent = '☰';
+      document.body.style.overflow = '';
+    });
+  });
+}
 
 /* ──────────────────────────────────────
    8. GSAP SCROLL ANIMATIONS
@@ -175,92 +196,119 @@ gsap.to('#scroll-indicator', {
 
 /* ── SECTION 3: SCIENCE / WAVELENGTHS ── */
 const s3Canvas = D.getElementById('s3-canvas');
-const s3Ctx = s3Canvas.getContext('2d');
+const s3Ctx = s3Canvas ? s3Canvas.getContext('2d') : null;
 
-const totalFrames = 192;
-const frames = [];
-let s3CurrentFrame = 0;
-let s3RAF = null;
+if (window.innerWidth > 767 && s3Canvas && s3Ctx) {
+  const totalFrames = 192;
+  const frames = [];
+  let s3CurrentFrame = 0;
+  let s3RAF = null;
 
-// ── Load all frames ──
-for (let i = 1; i <= totalFrames; i++) {
-  const img = new Image();
-  img.src = `images/fourkindsfacemask/ezgif-frame-${i.toString().padStart(3, '0')}.webp`;
-  frames.push(img);
-  if (i === 1) {
-    img.onload = () => drawFrame(0);
-  }
-}
-
-function drawFrame(index) {
-  const img = frames[index];
-  if (!img || !img.complete || !img.naturalWidth) return;
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const imgAspect = img.naturalWidth / img.naturalHeight;
-  const vpAspect = vw / vh;
-  let w, h;
-  if (vpAspect > imgAspect) {
-    w = vw; h = Math.round(vw / imgAspect);
-  } else {
-    h = vh; w = Math.round(vh * imgAspect);
-  }
-  s3Canvas.width = w;
-  s3Canvas.height = h;
-  s3Canvas.style.width = w + 'px';
-  s3Canvas.style.height = h + 'px';
-  s3Ctx.clearRect(0, 0, w, h);
-  s3Ctx.drawImage(img, 0, 0, w, h);
-}
-
-ScrollTrigger.create({
-  trigger: '#s3',
-  start: 'top top',
-  end: 'bottom bottom',
-  pin: '.s3-pin',
-  pinSpacing: false,
-  scrub: 0.5,
-  onUpdate: (self) => {
-    const target = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames));
-    if (target !== s3CurrentFrame) {
-      s3CurrentFrame = target;
-      if (s3RAF) cancelAnimationFrame(s3RAF);
-      s3RAF = requestAnimationFrame(() => drawFrame(s3CurrentFrame));
+  // ── Load all frames ──
+  for (let i = 1; i <= totalFrames; i++) {
+    const img = new Image();
+    img.src = `images/fourkindsfacemask/ezgif-frame-${i.toString().padStart(3, '0')}.webp`;
+    frames.push(img);
+    if (i === 1) {
+      img.onload = () => drawFrame(0);
     }
-  },
-});
+  }
 
-// Headline fades in at the start, fades out near the end of the section
-gsap.fromTo('#s3-headline',
-  { opacity: 0, y: 24 },
-  {
-    opacity: 1, y: 0,
+  function drawFrame(index) {
+    const img = frames[index];
+    if (!img || !img.complete || !img.naturalWidth) return;
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const imgRatio = img.naturalWidth / img.naturalHeight;
+    const vpRatio = vw / vh;
+
+    let cw, ch;
+    if (vpRatio > imgRatio) {
+      cw = vw;
+      ch = Math.ceil(vw / imgRatio);
+    } else {
+      ch = vh;
+      cw = Math.ceil(vh * imgRatio);
+    }
+
+    if (s3Canvas.width !== cw || s3Canvas.height !== ch) {
+      s3Canvas.width = cw;
+      s3Canvas.height = ch;
+    }
+
+    s3Ctx.clearRect(0, 0, cw, ch);
+    s3Ctx.drawImage(img, 0, 0, cw, ch);
+  }
+
+  ScrollTrigger.create({
+    trigger: '#s3',
+    start: 'top top',
+    end: 'bottom bottom',
+    pin: '.s3-pin',
+    pinSpacing: false,
+    scrub: 0.5,
+    onUpdate: (self) => {
+      const target = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames));
+      if (target !== s3CurrentFrame) {
+        s3CurrentFrame = target;
+        if (s3RAF) cancelAnimationFrame(s3RAF);
+        s3RAF = requestAnimationFrame(() => drawFrame(s3CurrentFrame));
+      }
+    },
+  });
+
+  // Headline fades in at the start, fades out near the end of the section
+  gsap.fromTo('#s3-headline',
+    { opacity: 0, y: 24 },
+    {
+      opacity: 1, y: 0,
+      scrollTrigger: {
+        trigger: '#s3',
+        start: 'top 85%',
+        end: 'top 50%',
+        scrub: 1,
+      },
+    }
+  );
+  gsap.to('#s3-headline', {
+    opacity: 0, y: -20,
     scrollTrigger: {
       trigger: '#s3',
-      start: 'top 85%',
-      end: 'top 50%',
+      start: '85% top',
+      end: '95% top',
       scrub: 1,
     },
-  }
-);
-gsap.to('#s3-headline', {
-  opacity: 0, y: -20,
-  scrollTrigger: {
-    trigger: '#s3',
-    start: '85% top',
-    end: '95% top',
-    scrub: 1,
-  },
-});
+  });
 
-let s3ResizeTimeout;
-window.addEventListener('resize', () => {
-  clearTimeout(s3ResizeTimeout);
-  s3ResizeTimeout = setTimeout(() => {
-    drawFrame(s3CurrentFrame);
-    ScrollTrigger.refresh();
-  }, 150);
-});
+  let s3ResizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(s3ResizeTimeout);
+    s3ResizeTimeout = setTimeout(() => {
+      drawFrame(s3CurrentFrame);
+      ScrollTrigger.refresh();
+    }, 150);
+  });
+}
+
+/* S3 mobile cards — fade in on scroll */
+if (window.innerWidth <= 767) {
+  const s3CardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('in-view');
+        }, parseInt(entry.target.dataset.delay) || 0);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.s3-card').forEach((card, i) => {
+    card.dataset.delay = i * 100;
+    s3CardObserver.observe(card);
+  });
+}
+
 
 
 /* ── SECTION 4: HORIZONTAL SCROLL GALLERY ── */
@@ -268,26 +316,23 @@ const hContainer = document.querySelector('.h-container');
 const panels = gsap.utils.toArray('.h-panel');
 
 const isMobile = () => window.innerWidth < 768;
-if (!isMobile()) {
-  if (panels.length && hContainer) {
-    gsap.to(hContainer, {
-      x: () => -(hContainer.scrollWidth - window.innerWidth),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#s4',
-        pin: true,
-        scrub: 1,
-        start: 'top top',
-        end: () => '+=' + (hContainer.scrollWidth - window.innerWidth),
-        invalidateOnRefresh: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
-  }
-} else {
-  // on mobile panels are vertical, no GSAP horizontal needed
+if (panels.length && hContainer) {
+  gsap.to(hContainer, {
+    x: () => -(hContainer.scrollWidth - window.innerWidth),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '#s4',
+      pin: true,
+      scrub: 1,
+      start: 'top top',
+      end: () => '+=' + (hContainer.scrollWidth - window.innerWidth),
+      invalidateOnRefresh: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+    },
+  });
 }
+
 // Stats count-up
 let statsTriggered = false;
 ScrollTrigger.create({
@@ -320,15 +365,7 @@ function animateCounter(id, start, end, suffix, duration) {
 
 
 /* ── SECTION 5: TRUST / DOCTOR ── */
-ScrollTrigger.create({
-  trigger: '#s5',
-  start: 'top top',
-  end: '+=150%',
-  pin: '.s5-pin',
-  scrub: 1.5,
-  anticipatePin: 1,
-  pinSpacing: true,
-});
+// Note: S5 uses native CSS position: sticky for smooth jerk-free scrolling
 
 // Doctor image
 gsap.fromTo('#doctor-img-wrap',
@@ -385,57 +422,51 @@ gsap.fromTo('#s5-attr',
 );
 
 
-/* ── SECTION 6: REVIEWS ── */
-if (!isMobile()) {
-  ScrollTrigger.create({
-    trigger: '#s6',
-    start: 'top top',
-    end: '+=100%',
-    pin: '.s6-pin',
-    scrub: 1.5,
-    anticipatePin: 1,
-    pinSpacing: true,
+/* ═══ S6 Reviews — Intersection Observer ═══ */
+const s6IO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = parseInt(entry.target.dataset.delay) || 0;
+      setTimeout(() => {
+        entry.target.classList.add('in-view');
+      }, delay);
+    }
   });
-}
+}, { threshold: 0.18 });
 
-// Review cards stagger
-const reviewCards = gsap.utils.toArray('.review-card');
-reviewCards.forEach((card, i) => {
-  gsap.fromTo(card,
-    { opacity: 0, y: 40 },
-    {
-      opacity: 1,
-      y: 0,
-      scrollTrigger: {
-        trigger: '#s6',
-        start: () => 'top ' + (80 - i * 15) + '%',
-        end: () => 'top ' + (50 - i * 15) + '%',
-        scrub: 1,
-      },
-    }
-  );
+document.querySelectorAll('.s6-review').forEach((el, i) => {
+  el.dataset.delay = i * 130;
+  s6IO.observe(el);
 });
 
-// Video thumbs
-const videoThumbs = gsap.utils.toArray('.video-thumb');
-videoThumbs.forEach((thumb, i) => {
-  gsap.fromTo(thumb,
-    { opacity: 0, y: 30 },
-    {
-      opacity: 1,
-      y: 0,
-      scrollTrigger: {
-        trigger: '#s6',
-        start: () => 'top ' + (70 - i * 12) + '%',
-        end: () => 'top ' + (45 - i * 12) + '%',
-        scrub: 1,
-      },
-    }
-  );
+document.querySelectorAll('.s6-thumb').forEach((el, i) => {
+  el.dataset.delay = i * 100;
+  s6IO.observe(el);
 });
 
+/* Mask tilts as each review enters view */
+const s6MaskWrap = document.getElementById('s6-mask-wrap');
+const s6Tilts = [
+  'rotate(-5deg) rotateY(8deg)  scale(1.02)',
+  'rotate(4deg)  rotateY(-7deg) scale(0.98)',
+  'rotate(-3deg) rotateY(9deg)  scale(1.01)',
+  'rotate(5deg)  rotateY(-5deg) scale(1.00)',
+];
 
+const s6TiltIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && s6MaskWrap) {
+      const idx = parseInt(entry.target.dataset.review) || 0;
+      s6MaskWrap.style.transform = s6Tilts[idx] || '';
+    }
+  });
+}, { threshold: 0.5 });
 
+document.querySelectorAll('.s6-review').forEach(r => {
+  s6TiltIO.observe(r);
+});
+
+/* No GSAP ScrollTrigger pin on S6 — natural scroll only */
 /* ── SECTION 7: CTA ── */
 
 // CTA glow

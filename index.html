@@ -23,10 +23,10 @@
 
   <!-- ═══ Navigation ═══ -->
   <nav id="nav"
-    class="flex justify-between items-center w-full px-4 md:px-8 lg:px-16 container mx-auto fixed top-0 left-0 right-0 z-50">
+    class="flex justify-between items-center w-full px-4 md:px-8 lg:px-16 fixed top-0 left-0 right-0 z-50">
     <div class="nav-logo">FAQ™ 202</div>
-    <div class="md:hidden text-cream text-2xl">☰</div>
-    <ul class="nav-links hidden md:flex items-center">
+    <div id="menu-toggle" class="md:hidden text-cream text-2xl">☰</div>
+    <ul id="nav-links" class="nav-links hidden md:flex items-center">
       <li><a href="#s1" data-section="0">Intro</a></li>
       <li><a href="#s3" data-section="1">Science</a></li>
       <li><a href="#s4" data-section="2">Results</a></li>
@@ -59,9 +59,9 @@
         <img src="images/model.png" alt="Woman wearing FAQ 202 LED mask" id="hero-model-img"
           class="object-cover w-full h-screen">
       </div>
-      <div class="hero-content container mx-auto px-4 md:px-8 lg:px-16">
+      <div class="hero-content w-full px-4 md:px-8 lg:px-16">
         <p class="hero-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
-        <h1 class="hero-h1 fade-up text-4xl md:text-6xl lg:text-8xl">Ten minutes to yourself.</h1>
+        <h1 class="hero-h1 fade-up">Ten minutes to yourself.</h1>
         <p class="hero-sub fade-up">The rest takes care of itself.</p>
       </div>
       <div class="scroll-indicator" id="scroll-indicator">
@@ -87,6 +87,67 @@
           </div>
         </div>
       </div>
+
+      <div class="s3-mobile" id="s3-mobile">
+        <div class="s3-mobile-header">
+          <p class="s3-mobile-eyebrow">The Science</p>
+          <h2 class="s3-mobile-title">
+            Four kinds of light.<br>
+            <em>Each one your skin already knows.</em>
+          </h2>
+        </div>
+
+        <div class="s3-card" data-color="#E84030">
+          <div class="s3-card-dot" style="background:#E84030; box-shadow:0 0 20px rgba(232,64,48,0.6);"></div>
+          <div class="s3-card-body">
+            <p class="s3-card-nm">650nm</p>
+            <h3 class="s3-card-name">Red Light</h3>
+            <p class="s3-card-benefit">Stimulates collagen production. Reduces fine lines and wrinkles. Improves overall skin texture.</p>
+          </div>
+          <div class="s3-card-bar" style="background: linear-gradient(90deg, rgba(232,64,48,0.15), rgba(232,64,48,0.4));"></div>
+        </div>
+
+        <div class="s3-card" data-color="#5B9AE8">
+          <div class="s3-card-dot" style="background:#5B9AE8; box-shadow:0 0 20px rgba(91,154,232,0.6);"></div>
+          <div class="s3-card-body">
+            <p class="s3-card-nm">465nm</p>
+            <h3 class="s3-card-name">Blue Light</h3>
+            <p class="s3-card-benefit">Targets acne-causing bacteria. Reduces breakouts and blemishes. Calms inflammatory acne.</p>
+          </div>
+          <div class="s3-card-bar" style="background: linear-gradient(90deg, rgba(91,154,232,0.15), rgba(91,154,232,0.4));"></div>
+        </div>
+
+        <div class="s3-card" data-color="#C9916A">
+          <div class="s3-card-dot" style="background:#C9916A; box-shadow:0 0 20px rgba(201,145,106,0.6);"></div>
+          <div class="s3-card-body">
+            <p class="s3-card-nm">850nm</p>
+            <h3 class="s3-card-name">Near-Infrared</h3>
+            <p class="s3-card-benefit">Penetrates deepest into skin. Accelerates cell repair and healing. Boosts elastin and collagen.</p>
+          </div>
+          <div class="s3-card-bar" style="background: linear-gradient(90deg, rgba(201,145,106,0.15), rgba(201,145,106,0.4));"></div>
+        </div>
+
+        <div class="s3-card" data-color="#42C472">
+          <div class="s3-card-dot" style="background:#42C472; box-shadow:0 0 20px rgba(66,196,114,0.6);"></div>
+          <div class="s3-card-body">
+            <p class="s3-card-nm">520nm</p>
+            <h3 class="s3-card-name">Green Light</h3>
+            <p class="s3-card-benefit">Evens skin tone and texture. Reduces hyperpigmentation. Brightens dull complexion.</p>
+          </div>
+          <div class="s3-card-bar" style="background: linear-gradient(90deg, rgba(66,196,114,0.15), rgba(66,196,114,0.4));"></div>
+        </div>
+
+        <div class="s3-card" data-color="#A060D0">
+          <div class="s3-card-dot" style="background:#A060D0; box-shadow:0 0 20px rgba(160,96,208,0.6);"></div>
+          <div class="s3-card-body">
+            <p class="s3-card-nm">440nm</p>
+            <h3 class="s3-card-name">Purple Light</h3>
+            <p class="s3-card-benefit">Targets pigmentation and dark spots. Combines red and blue benefits. Renews and rejuvenates skin.</p>
+          </div>
+          <div class="s3-card-bar" style="background: linear-gradient(90deg, rgba(160,96,208,0.15), rgba(160,96,208,0.4));"></div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ════════════════════════════════════
@@ -158,19 +219,26 @@
          SECTION 5 — TRUST / DOCTOR
          ════════════════════════════════════ -->
     <section id="s5">
-      <div class="s5-pin w-full h-screen">
-        <div class="s5-split flex flex-col md:flex-row container mx-auto px-4 md:px-8 lg:px-16 items-center">
-          <div class="doctor-img-wrap md:w-[40%] w-48 h-48 md:w-auto md:h-auto rounded-full mx-auto"
-            id="doctor-img-wrap">
-            <img src="images/doctor.png" alt="Dr. Priya Sharma — Board-certified Dermatologist" loading="lazy"
-              class="w-full h-full object-cover rounded-full md:rounded-none">
+      <div class="s5-sticky">
+        <div class="s5-wrapper">
+
+          <div class="s5-left">
+            <div class="s5-img-wrap" id="doctor-img-wrap">
+              <img src="images/doctor.png" alt="Dr. Priya Sharma — Board-certified Dermatologist" loading="lazy">
+            </div>
           </div>
-          <div class="s5-text-col md:w-[60%] flex-1">
-            <h2 class="s5-headline" id="s5-headline">FDA-cleared. Derm-reviewed.<br>Clinically dosed.</h2>
+
+          <div class="s5-right">
+            <h2 class="s5-headline" id="s5-headline">FDA-cleared. Derm-reviewed.<br><em>Clinically dosed.</em></h2>
             <p class="s5-quote" id="s5-quote">"The FAQ 202 delivers clinical-grade wavelengths at intensities that
               actually make a difference. It's the only at-home device I recommend without hesitation."</p>
-            <p class="s5-attribution" id="s5-attr">— Dr. Priya Sharma · Board-certified Dermatologist · Mumbai</p>
+
+            <div class="s5-meta" id="s5-attr">
+              <strong>DR. PRIYA SHARMA</strong>
+              <span>Board-certified Dermatologist, Mumbai</span>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -179,54 +247,101 @@
          SECTION 6 — REVIEWS / SOCIAL PROOF
          ════════════════════════════════════ -->
     <section id="s6">
-      <div class="s6-pin w-full h-screen">
-        <div
-          class="reviews-grid grid grid-cols-1 md:grid-cols-2 gap-8 container mx-auto px-4 md:px-8 lg:px-16 w-full items-center">
-          <div class="reviews-left flex flex-col gap-6">
-            <img src="images/review-1.png" loading="lazy">
-            <div class="review-stars">★★★★★ &nbsp;5/5</div>
-            <p class="review-text">"The <span class="highlight">glow</span> is unreal. My skin looks like it's been
-              retouched."</p>
-            <p class="review-author">— Ananya R., Beauty Editor</p>
-          </div>
-          <img src="images/review-2.png" loading="lazy">
-          <div class="review-stars">★★★★★ &nbsp;5/5</div>
-          <p class="review-text">"I wear it while making <span class="highlight">chai</span>. Ten minutes and done."
-          </p>
-          <p class="review-author">— Meera S., Working Professional</p>
-        </div>
-        <img src="images/review-3.png" loading="lazy">
-        <div class="review-stars">★★★★★ &nbsp;5/5</div>
-        <p class="review-text">"My dermatologist noticed the <span class="highlight">difference</span> before I
-          told her."</p>
-        <p class="review-author">— Kavya P., Skincare Enthusiast</p>
+      <div class="s6-intro">
+        <p class="s6-eyebrow">What they're saying</p>
+        <h2 class="s6-title">Real people.<br><em>Real results.</em></h2>
       </div>
-  </div>
-  <div class="reviews-right flex flex-col gap-4">
-    <div class="video-thumb placeholder-img" id="ph-video-1">Placeholder: YouTube review thumbnail 1</div>
-    <div class="video-thumb placeholder-img" id="ph-video-2">Placeholder: YouTube review thumbnail 2</div>
-    <div class="video-thumb placeholder-img" id="ph-video-3">Placeholder: YouTube review thumbnail 3</div>
-  </div>
-  </div>
-  </div>
-  </section>
 
-  <!-- ════════════════════════════════════
+      <div class="s6-wrapper">
+
+        <!-- LEFT: Stacked reviews -->
+        <div class="s6-left">
+          <div class="s6-review" data-review="0">
+            <div class="s6-stars">★★★★★ <span>[5/5]</span></div>
+            <p class="s6-quote">"The <em class="rh">glow</em> is unreal.
+              My skin looks like it's been retouched."</p>
+            <div class="s6-meta">
+              <strong>ANANYA R.</strong>
+              <span>Beauty Editor, Vogue India</span>
+            </div>
+          </div>
+
+          <div class="s6-review" data-review="1">
+            <div class="s6-stars">★★★★★ <span>[5/5]</span></div>
+            <p class="s6-quote">"I wear it while making <em class="rh">chai</em>.
+              Ten minutes and done. My skin has never looked better."</p>
+            <div class="s6-meta">
+              <strong>MEERA S.</strong>
+              <span>Working Professional, Mumbai</span>
+            </div>
+          </div>
+
+          <div class="s6-review" data-review="2">
+            <div class="s6-stars">★★★★★ <span>[5/5]</span></div>
+            <p class="s6-quote">"My dermatologist noticed the
+              <em class="rh">difference</em> before I even told her."
+            </p>
+            <div class="s6-meta">
+              <strong>KAVYA P.</strong>
+              <span>Skincare Enthusiast, Bangalore</span>
+            </div>
+          </div>
+
+          <div class="s6-review" data-review="3">
+            <div class="s6-stars">★★★★★ <span>[5/5]</span></div>
+            <p class="s6-quote">"Ten minutes a day changed my entire
+              <em class="rh">relationship</em> with my skin."
+            </p>
+            <div class="s6-meta">
+              <strong>PRIYA D.</strong>
+              <span>Entrepreneur, Delhi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER: Sticky mask -->
+        <div class="s6-center">
+          <div class="s6-mask-wrap" id="s6-mask-wrap">
+            <div class="s6-glow"></div>
+            <img src="images/mask.png" alt="FAQ 202 LED Mask" id="s6-mask-img">
+          </div>
+        </div>
+
+        <!-- RIGHT: Stacked media thumbnails -->
+        <div class="s6-right">
+          <div class="s6-thumb" id="s6-thumb-1">
+            <span>FAQ 202 LED Mask Review</span>
+          </div>
+          <div class="s6-thumb" id="s6-thumb-2">
+            <span>Before / After — 4 weeks</span>
+          </div>
+          <div class="s6-thumb" id="s6-thumb-3">
+            <span>Morning Routine with FAQ 202</span>
+          </div>
+          <div class="s6-thumb" id="s6-thumb-4">
+            <span>Dermatologist Explains LED Therapy</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════
          SECTION 7 — CTA / PRODUCT HERO
          ════════════════════════════════════ -->
-  <section id="s7">
-    <div
-      class="s7-pin container mx-auto px-4 md:px-8 lg:px-16 flex flex-col items-center justify-center h-screen w-full">
-      <div class="cta-glow" id="cta-glow"></div>
-      <div class="cta-content text-center">
-        <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
-        <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
-        <p class="cta-price fade-up text-8xl md:text-9xl lg:text-[12rem]">$799</p>
-        <button class="cta-button fade-up w-full max-w-xs mx-auto" id="cta-shop">SHOP FAQ™ 202</button>
-        <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
+    <section id="s7">
+      <div
+        class="s7-pin w-full px-4 md:px-8 lg:px-16 flex flex-col items-center justify-center h-screen">
+        <div class="cta-glow" id="cta-glow"></div>
+        <div class="cta-content text-center">
+          <p class="cta-eyebrow fade-up">FAQ™ 202 · FOREO Swiss</p>
+          <h2 class="cta-headline fade-up">Your last skincare purchase<br>for a while.</h2>
+          <p class="cta-price fade-up">$799</p>
+          <button class="cta-button fade-up w-full max-w-xs mx-auto" id="cta-shop">SHOP FAQ™ 202</button>
+          <p class="cta-guarantee fade-up">2-year warranty · Free shipping · 60-day returns</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   </div><!-- /.scroll-content -->
 
