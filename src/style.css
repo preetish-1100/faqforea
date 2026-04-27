@@ -454,11 +454,6 @@ button {
   max-height: none;
 }
 
-/* Hide mobile cards on desktop/tablet */
-.s3-mobile {
-  display: none;
-}
-
 @media (max-width: 768px) {
   #s3 {
     height: 500vh;
@@ -1148,8 +1143,31 @@ button {
 
   .s6-left {
     order: 2;
-    padding: 2rem 1.5rem 3rem;
+    padding: 2rem 0 3rem;
     border-right: none;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .s6-review {
+    flex: 0 0 100vw;
+    width: 100vw;
+    padding: 0 1.5rem 2.5rem;
+    border-bottom: none;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+
+  .s6-review:first-child {
+    animation: autoSlideMargin 16s ease-in-out infinite;
+  }
+
+  @keyframes autoSlideMargin {
+    0%, 20%   { margin-left: 0; }
+    25%, 45%  { margin-left: -100vw; }
+    50%, 70%  { margin-left: -200vw; }
+    75%, 95%  { margin-left: -300vw; }
+    100%      { margin-left: 0; }
   }
 
   .s6-center {
@@ -1426,125 +1444,10 @@ button {
   .hero-content {
     padding: 0 1.5rem;
   }
-  /* ── S3 Science: hide canvas, show cards ── */
-  .s3-pin {
-    display: none !important;
-  }
 
-  #s3 {
-    height: auto !important;
-    background: #000;
-  }
-
-  .s3-mobile {
-    display: block;
-    padding: 5rem 0 4rem;
-    background: #000;
-  }
-
-  .s3-mobile-header {
-    padding: 0 1.5rem 3rem;
-    border-bottom: 1px dashed rgba(201,145,106,0.15);
-    margin-bottom: 0;
-  }
-
-  .s3-mobile-eyebrow {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 200;
-    letter-spacing: 0.42em;
-    text-transform: uppercase;
-    color: #C9916A;
-    margin-bottom: 1rem;
-    display: block;
-  }
-
-  .s3-mobile-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 200;
-    font-size: clamp(2rem, 8vw, 2.8rem);
-    color: #EDE8DF;
-    line-height: 1.15;
-    margin: 0;
-  }
-
-  .s3-mobile-title em {
-    font-style: italic;
-    color: rgba(237,232,223,0.45);
-  }
-
-  .s3-card {
-    position: relative;
-    padding: 2.5rem 1.5rem;
-    border-bottom: 1px dashed rgba(255,255,255,0.06);
-    display: flex;
-    align-items: flex-start;
-    gap: 1.25rem;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.65s ease, transform 0.65s ease;
-  }
-
-  .s3-card.in-view {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .s3-card-bar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .s3-card-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    margin-top: 0.35rem;
-    position: relative;
-    z-index: 2;
-  }
-
-  .s3-card-body {
-    position: relative;
-    z-index: 2;
-    flex: 1;
-  }
-
-  .s3-card-nm {
-    font-family: 'Jost', sans-serif;
-    font-size: 0.55rem;
-    font-weight: 200;
-    letter-spacing: 0.28em;
-    color: rgba(237,232,223,0.4);
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-    display: block;
-  }
-
-  .s3-card-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 200;
-    font-size: clamp(1.5rem, 6vw, 2.2rem);
-    color: #EDE8DF;
-    line-height: 1.1;
-    margin: 0 0 0.75rem;
-  }
-
-  .s3-card-benefit {
-    font-family: 'Jost', sans-serif;
-    font-size: clamp(0.7rem, 2.8vw, 0.85rem);
-    font-weight: 200;
-    letter-spacing: 0.08em;
-    color: rgba(237,232,223,0.55);
-    line-height: 1.75;
-    margin: 0;
+  /* ── S3 Science headline top padding ── */
+  .s3-headline-container {
+    padding-top: clamp(4rem, 10vh, 5rem);
   }
 
   /* ── S4 Horizontal Gallery ── */

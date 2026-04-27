@@ -196,119 +196,98 @@ gsap.to('#scroll-indicator', {
 
 /* ── SECTION 3: SCIENCE / WAVELENGTHS ── */
 const s3Canvas = D.getElementById('s3-canvas');
-const s3Ctx = s3Canvas ? s3Canvas.getContext('2d') : null;
+const s3Ctx = s3Canvas.getContext('2d');
 
-if (window.innerWidth > 767 && s3Canvas && s3Ctx) {
-  const totalFrames = 192;
-  const frames = [];
-  let s3CurrentFrame = 0;
-  let s3RAF = null;
+const totalFrames = 192;
+const frames = [];
+let s3CurrentFrame = 0;
+let s3RAF = null;
 
-  // ── Load all frames ──
-  for (let i = 1; i <= totalFrames; i++) {
-    const img = new Image();
-    img.src = `images/fourkindsfacemask/ezgif-frame-${i.toString().padStart(3, '0')}.webp`;
-    frames.push(img);
-    if (i === 1) {
-      img.onload = () => drawFrame(0);
-    }
+// ── Load all frames ──
+for (let i = 1; i <= totalFrames; i++) {
+  const img = new Image();
+  img.src = `images/fourkindsfacemask/ezgif-frame-${i.toString().padStart(3, '0')}.webp`;
+  frames.push(img);
+  if (i === 1) {
+    img.onload = () => drawFrame(0);
+  }
+}
+
+function drawFrame(index) {
+  const img = frames[index];
+  if (!img || !img.complete || !img.naturalWidth) return;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const imgRatio = img.naturalWidth / img.naturalHeight;
+  const vpRatio = vw / vh;
+
+  let cw, ch;
+  if (vpRatio > imgRatio) {
+    cw = vw;
+    ch = Math.ceil(vw / imgRatio);
+  } else {
+    ch = vh;
+    cw = Math.ceil(vh * imgRatio);
   }
 
-  function drawFrame(index) {
-    const img = frames[index];
-    if (!img || !img.complete || !img.naturalWidth) return;
-
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const imgRatio = img.naturalWidth / img.naturalHeight;
-    const vpRatio = vw / vh;
-
-    let cw, ch;
-    if (vpRatio > imgRatio) {
-      cw = vw;
-      ch = Math.ceil(vw / imgRatio);
-    } else {
-      ch = vh;
-      cw = Math.ceil(vh * imgRatio);
-    }
-
-    if (s3Canvas.width !== cw || s3Canvas.height !== ch) {
-      s3Canvas.width = cw;
-      s3Canvas.height = ch;
-    }
-
-    s3Ctx.clearRect(0, 0, cw, ch);
-    s3Ctx.drawImage(img, 0, 0, cw, ch);
+  if (s3Canvas.width !== cw || s3Canvas.height !== ch) {
+    s3Canvas.width = cw;
+    s3Canvas.height = ch;
   }
 
-  ScrollTrigger.create({
-    trigger: '#s3',
-    start: 'top top',
-    end: 'bottom bottom',
-    pin: '.s3-pin',
-    pinSpacing: false,
-    scrub: 0.5,
-    onUpdate: (self) => {
-      const target = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames));
-      if (target !== s3CurrentFrame) {
-        s3CurrentFrame = target;
-        if (s3RAF) cancelAnimationFrame(s3RAF);
-        s3RAF = requestAnimationFrame(() => drawFrame(s3CurrentFrame));
-      }
-    },
-  });
+  s3Ctx.clearRect(0, 0, cw, ch);
+  s3Ctx.drawImage(img, 0, 0, cw, ch);
+}
 
-  // Headline fades in at the start, fades out near the end of the section
-  gsap.fromTo('#s3-headline',
-    { opacity: 0, y: 24 },
-    {
-      opacity: 1, y: 0,
-      scrollTrigger: {
-        trigger: '#s3',
-        start: 'top 85%',
-        end: 'top 50%',
-        scrub: 1,
-      },
+ScrollTrigger.create({
+  trigger: '#s3',
+  start: 'top top',
+  end: 'bottom bottom',
+  pin: '.s3-pin',
+  pinSpacing: false,
+  scrub: 0.5,
+  onUpdate: (self) => {
+    const target = Math.min(totalFrames - 1, Math.floor(self.progress * totalFrames));
+    if (target !== s3CurrentFrame) {
+      s3CurrentFrame = target;
+      if (s3RAF) cancelAnimationFrame(s3RAF);
+      s3RAF = requestAnimationFrame(() => drawFrame(s3CurrentFrame));
     }
-  );
-  gsap.to('#s3-headline', {
-    opacity: 0, y: -20,
+  },
+});
+
+// Headline fades in at the start, fades out near the end of the section
+gsap.fromTo('#s3-headline',
+  { opacity: 0, y: 24 },
+  {
+    opacity: 1, y: 0,
     scrollTrigger: {
       trigger: '#s3',
-      start: '85% top',
-      end: '95% top',
+      start: 'top 85%',
+      end: 'top 50%',
       scrub: 1,
     },
-  });
+  }
+);
+gsap.to('#s3-headline', {
+  opacity: 0, y: -20,
+  scrollTrigger: {
+    trigger: '#s3',
+    start: '85% top',
+    end: '95% top',
+    scrub: 1,
+  },
+});
 
-  let s3ResizeTimeout;
-  window.addEventListener('resize', () => {
-    clearTimeout(s3ResizeTimeout);
-    s3ResizeTimeout = setTimeout(() => {
-      drawFrame(s3CurrentFrame);
-      ScrollTrigger.refresh();
-    }, 150);
-  });
-}
-
-/* S3 mobile cards — fade in on scroll */
-if (window.innerWidth <= 767) {
-  const s3CardObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('in-view');
-        }, parseInt(entry.target.dataset.delay) || 0);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.s3-card').forEach((card, i) => {
-    card.dataset.delay = i * 100;
-    s3CardObserver.observe(card);
-  });
-}
-
+let s3ResizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(s3ResizeTimeout);
+  s3ResizeTimeout = setTimeout(() => {
+    drawFrame(s3CurrentFrame);
+    ScrollTrigger.refresh();
+  }, 150);
+});
 
 
 /* ── SECTION 4: HORIZONTAL SCROLL GALLERY ── */
@@ -331,6 +310,7 @@ if (panels.length && hContainer) {
       anticipatePin: 1,
     },
   });
+  ScrollTrigger.refresh();
 }
 
 // Stats count-up
